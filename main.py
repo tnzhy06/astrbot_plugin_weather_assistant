@@ -67,7 +67,7 @@ class WeatherAssistantPlugin(Star):
             )
             if not resolved:
                 yield event.plain_result(
-                    "未找到匹配地点，请尝试更完整地名（如：北京市朝阳区、温州市鹿城区）。"
+                    "未找到匹配地点，请其他地名。"
                 )
                 return
             resolved_location, display_name, full_name = resolved
