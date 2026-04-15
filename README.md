@@ -22,10 +22,27 @@
 
 - `global_config.api_host`：和风天气控制台分配的专属 API Host
 - `global_config.auth_type`：`jwt` 或 `api_key`
+- `global_config.jwt_kid`：JWT 凭据的 `kid`（推荐）
+- `global_config.jwt_project_id`：项目 ID，作为 JWT 的 `sub`（推荐）
+- `global_config.jwt_private_key`：ED25519 私钥 PEM 全文（推荐）
+- `global_config.jwt_expire_seconds`：JWT 过期时间（秒，默认 `3600`，支持 `60~86400`）
 - `global_config.default_location`：默认查询位置（如需使用分钟级降水，建议填写经纬度）
 - `weather_now_config.weather_fields`：实时天气返回指标开关
 - `forecast_config.forecast_default_days`：天气预报默认天数（`3d/7d/10d/15d/30d`）
 - `minutely_precip_config.minutely_show_details`：分钟级降水是否显示各时段明细（默认开启）
+
+说明：插件已固定使用中文返回（`lang=zh`），不再提供语言配置项。
+说明：插件已固定使用公制单位（`unit=m`），不再提供温度单位配置项。
+
+JWT 推荐配置方式：
+
+1. 将 `global_config.auth_type` 设为 `jwt`
+2. 填写 `global_config.jwt_kid`
+3. 填写 `global_config.jwt_project_id`
+4. 填写 `global_config.jwt_private_key`（完整 PEM）
+5. 可选填写 `global_config.jwt_expire_seconds`（不填默认 3600 秒）
+
+插件会自动生成并携带 `Authorization: Bearer <JWT>` 请求头，无需额外配置 token 字符串。
 
 如果你只想返回天气和温度，可以将 `weather_fields` 配置为：
 

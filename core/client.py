@@ -19,7 +19,9 @@ class QWeatherClient:
 
         headers = self._config.build_auth_headers()
         if not headers:
-            raise ValueError("未配置鉴权信息，请填写 API Key 或 JWT Token。")
+            raise ValueError(
+                "未配置鉴权信息，请填写 API Key 或 JWT（jwt_kid/jwt_project_id/jwt_private_key）。"
+            )
 
         return api_host, headers
 
@@ -29,14 +31,10 @@ class QWeatherClient:
         url = f"{api_host}/v7/weather/now"
         params = {
             "location": location,
-            "lang": str(
-                self._config.get_group_value("global_config", "lang", "zh")
-            ).strip()
-            or "zh",
-            "unit": str(
-                self._config.get_group_value("global_config", "unit", "m")
-            ).strip()
-            or "m",
+            # 强制中文返回，避免用户配置导致多语言输出不一致。
+            "lang": "zh",
+            # 强制公制单位（摄氏度等），避免不同配置造成输出口径不一致。
+            "unit": "m",
         }
         resp = await self._http_client.get(url, params=params, headers=headers)
         resp.raise_for_status()
@@ -48,10 +46,8 @@ class QWeatherClient:
         url = f"{api_host}/geo/v2/city/lookup"
         params = {
             "location": location,
-            "lang": str(
-                self._config.get_group_value("global_config", "lang", "zh")
-            ).strip()
-            or "zh",
+            # 强制中文返回，避免用户配置导致多语言输出不一致。
+            "lang": "zh",
             "range": str(
                 self._config.get_group_value("global_config", "geo_range", "cn")
             ).strip()
@@ -70,14 +66,10 @@ class QWeatherClient:
         url = f"{api_host}/v7/weather/{days}"
         params = {
             "location": location,
-            "lang": str(
-                self._config.get_group_value("global_config", "lang", "zh")
-            ).strip()
-            or "zh",
-            "unit": str(
-                self._config.get_group_value("global_config", "unit", "m")
-            ).strip()
-            or "m",
+            # 强制中文返回，避免用户配置导致多语言输出不一致。
+            "lang": "zh",
+            # 强制公制单位（摄氏度等），避免不同配置造成输出口径不一致。
+            "unit": "m",
         }
         resp = await self._http_client.get(url, params=params, headers=headers)
         resp.raise_for_status()
@@ -89,10 +81,8 @@ class QWeatherClient:
         url = f"{api_host}/v7/minutely/5m"
         params = {
             "location": location,
-            "lang": str(
-                self._config.get_group_value("global_config", "lang", "zh")
-            ).strip()
-            or "zh",
+            # 强制中文返回，避免用户配置导致多语言输出不一致。
+            "lang": "zh",
         }
         resp = await self._http_client.get(url, params=params, headers=headers)
         resp.raise_for_status()

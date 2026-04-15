@@ -26,33 +26,35 @@
         "description": "和风天气 API Key（auth_type=api_key 时必填）",
         "default": ""
       },
-      "jwt_token": {
-        "type": "text",
-        "description": "和风天气 JWT Token（auth_type=jwt 时必填）",
-        "hint": "Authorization: Bearer <token> 中的 token 内容",
+      "jwt_kid": {
+        "type": "string",
+        "description": "和风天气 JWT kid（auth_type=jwt 时推荐填写）",
+        "hint": "控制台 JWT 凭据中的 kid",
         "default": ""
+      },
+      "jwt_project_id": {
+        "type": "string",
+        "description": "和风天气 JWT project_id（auth_type=jwt 时推荐填写）",
+        "hint": "控制台项目 ID，将写入 JWT 的 sub",
+        "default": ""
+      },
+      "jwt_private_key": {
+        "type": "text",
+        "description": "和风天气 JWT 私钥 PEM（auth_type=jwt 时推荐填写）",
+        "hint": "粘贴 ED25519 私钥全文（BEGIN PRIVATE KEY 到 END PRIVATE KEY）",
+        "default": ""
+      },
+      "jwt_expire_seconds": {
+        "type": "int",
+        "description": "JWT 过期时间（秒）",
+        "hint": "默认 3600；建议范围 60~86400（和风天气要求最长不超过 24 小时）",
+        "default": 3600
       },
       "default_location": {
         "type": "string",
         "description": "默认查询位置",
         "hint": "支持地名、LocationID 或经纬度（如 116.41,39.92）。若要使用分钟级降水功能，请务必填写经纬度。",
         "default": ""
-      },
-      "lang": {
-        "type": "string",
-        "description": "返回语言",
-        "hint": "常用值：zh、en",
-        "default": "zh"
-      },
-      "unit": {
-        "type": "string",
-        "description": "温度单位",
-        "hint": "m=公制，i=英制",
-        "options": [
-          "m",
-          "i"
-        ],
-        "default": "m"
       },
       "geo_range": {
         "type": "string",
