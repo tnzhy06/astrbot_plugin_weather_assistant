@@ -53,7 +53,11 @@ git clone https://github.com/tnzhy06/astrbot_plugin_weather_assistant.git
 
 > 💡 **API 获取指南**：
 >
-> 请前往 [和风天气开发服务](https://dev.qweather.com/) 注册账号并创建项目，获取 `API Key` 或 `JWT` 凭据。获取方式参考文档 [开发配置 | 和风天气开发服务](https://dev.qweather.com/docs/configuration/)。
+> 请前往 [和风天气开发服务](https://dev.qweather.com/) 注册账号并创建项目，获取 `API Key` 或 `JWT` 凭据。获取方式参考文档 [开发配置 | 和风天气开发服务](https://map.tianditu.gov.cn/)。
+
+> 💡 **经纬度信息获取指南**：
+>
+> 请前往 [天地图](https://dev.qweather.com/docs/configuration/) 右下角有鼠标指针的指向位置的经纬度信息，当然也可以使用其他你希望的方式获取。
 
 ------
 

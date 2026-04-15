@@ -7,8 +7,7 @@
       "api_host": {
         "type": "string",
         "description": "和风天气 API Host",
-        "hint": "示例：https://xxxxxxxxxx.re.qweatherapi.com",
-        "obvious_hint": true,
+        "hint": "获取方式见文档，示例：https://xxxxxxxxxx.re.qweatherapi.com",
         "default": ""
       },
       "auth_type": {
@@ -60,7 +59,7 @@
       "default_location": {
         "type": "string",
         "description": "默认查询位置",
-        "hint": "支持地名、LocationID 或经纬度（如 116.41,39.92）。若要使用分钟级降水功能，请务必填写经纬度。",
+        "hint": "支持地名、LocationID 或经纬度（如 116.41,39.92）「小数点后保留两位」。若要使用分钟级降水功能，请务必填写经纬度。",
         "default": ""
       },
       "geo_range": {
