@@ -1,0 +1,179 @@
+{
+  "global_config": {
+    "type": "object",
+    "description": "全局配置",
+    "hint": "鉴权、默认位置和通用请求参数",
+    "items": {
+      "api_host": {
+        "type": "string",
+        "description": "和风天气 API Host（建议填写控制台提供的专属 Host）",
+        "hint": "示例：https://abcde.re.qweatherapi.com",
+        "obvious_hint": true,
+        "default": ""
+      },
+      "auth_type": {
+        "type": "string",
+        "description": "鉴权方式",
+        "hint": "建议优先使用 jwt，也可使用 api_key",
+        "options": [
+          "jwt",
+          "api_key"
+        ],
+        "default": "api_key"
+      },
+      "api_key": {
+        "type": "string",
+        "description": "和风天气 API Key（auth_type=api_key 时必填）",
+        "default": ""
+      },
+      "jwt_token": {
+        "type": "text",
+        "description": "和风天气 JWT Token（auth_type=jwt 时必填）",
+        "hint": "Authorization: Bearer <token> 中的 token 内容",
+        "default": ""
+      },
+      "default_location": {
+        "type": "string",
+        "description": "默认查询位置",
+        "hint": "支持地名、LocationID 或经纬度（如 116.41,39.92）。若要使用分钟级降水功能，请务必填写经纬度。",
+        "default": ""
+      },
+      "lang": {
+        "type": "string",
+        "description": "返回语言",
+        "hint": "常用值：zh、en",
+        "default": "zh"
+      },
+      "unit": {
+        "type": "string",
+        "description": "温度单位",
+        "hint": "m=公制，i=英制",
+        "options": [
+          "m",
+          "i"
+        ],
+        "default": "m"
+      },
+      "geo_range": {
+        "type": "string",
+        "description": "GeoAPI 搜索范围",
+        "hint": "默认 cn（中国），可改为 world",
+        "options": [
+          "cn",
+          "world"
+        ],
+        "default": "cn"
+      },
+      "geo_number": {
+        "type": "int",
+        "description": "GeoAPI 返回候选数量",
+        "hint": "默认 10，插件会取第一条作为最佳匹配",
+        "default": 10
+      }
+    }
+  },
+  "weather_now_config": {
+    "type": "object",
+    "description": "实时天气相关配置",
+    "items": {
+      "weather_fields": {
+        "type": "object",
+        "description": "实时天气返回指标开关",
+        "hint": "可按需关闭不想展示的指标，例如只保留天气和温度",
+        "items": {
+          "match_location": {
+            "type": "bool",
+            "description": "显示 GeoAPI 命中地点信息",
+            "default": true
+          },
+          "location": {
+            "type": "bool",
+            "description": "显示地点",
+            "default": true
+          },
+          "weather": {
+            "type": "bool",
+            "description": "显示天气现象",
+            "default": true
+          },
+          "temperature": {
+            "type": "bool",
+            "description": "显示温度",
+            "default": true
+          },
+          "feels_like": {
+            "type": "bool",
+            "description": "显示体感温度",
+            "default": true
+          },
+          "humidity": {
+            "type": "bool",
+            "description": "显示湿度",
+            "default": true
+          },
+          "wind": {
+            "type": "bool",
+            "description": "显示风向风速",
+            "default": true
+          },
+          "precip": {
+            "type": "bool",
+            "description": "显示降水量",
+            "default": true
+          },
+          "pressure": {
+            "type": "bool",
+            "description": "显示气压",
+            "default": true
+          },
+          "visibility": {
+            "type": "bool",
+            "description": "显示能见度",
+            "default": true
+          },
+          "obs_time": {
+            "type": "bool",
+            "description": "显示观测时间",
+            "default": true
+          },
+          "update_time": {
+            "type": "bool",
+            "description": "显示数据更新时间",
+            "default": true
+          }
+        }
+      }
+    }
+  },
+  "forecast_config": {
+    "type": "object",
+    "description": "天气预报相关配置",
+    "items": {
+      "forecast_default_days": {
+        "type": "string",
+        "description": "天气预报默认天数",
+        "hint": "支持 3d、7d、10d、15d、30d",
+        "options": [
+          "3d",
+          "7d",
+          "10d",
+          "15d",
+          "30d"
+        ],
+        "default": "3d"
+      }
+    }
+  },
+  "minutely_precip_config": {
+    "type": "object",
+    "description": "分钟级降水相关配置",
+    "items": {
+      "minutely_show_details": {
+        "type": "bool",
+        "description": "分钟级降水是否显示各时段详细数据",
+        "hint": "关闭后仅返回降水概述与更新时间",
+        "default": true
+      }
+    }
+  }
+}
