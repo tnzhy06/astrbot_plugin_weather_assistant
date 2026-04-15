@@ -6,8 +6,8 @@
     "items": {
       "api_host": {
         "type": "string",
-        "description": "和风天气 API Host（建议填写控制台提供的专属 Host）",
-        "hint": "示例：https://abcde.re.qweatherapi.com",
+        "description": "和风天气 API Host",
+        "hint": "示例：https://xxxxxxxxxx.re.qweatherapi.com",
         "obvious_hint": true,
         "default": ""
       },
@@ -23,32 +23,35 @@
       },
       "api_key": {
         "type": "string",
-        "description": "和风天气 API Key（auth_type=api_key 时必填）",
+        "description": "「api_key填写」和风天气 API Key",
         "default": ""
       },
       "jwt_kid": {
         "type": "string",
-        "description": "和风天气 JWT kid（auth_type=jwt 时推荐填写）",
-        "hint": "控制台 JWT 凭据中的 kid",
+        "description": "「jwt填写」和风天气 凭据ID",
         "default": ""
       },
       "jwt_project_id": {
         "type": "string",
-        "description": "和风天气 JWT project_id（auth_type=jwt 时推荐填写）",
-        "hint": "控制台项目 ID，将写入 JWT 的 sub",
+        "description": "「jwt填写」和风天气 项目ID",
         "default": ""
       },
       "jwt_private_key": {
         "type": "text",
-        "description": "和风天气 JWT 私钥 PEM（auth_type=jwt 时推荐填写）",
-        "hint": "粘贴 ED25519 私钥全文（BEGIN PRIVATE KEY 到 END PRIVATE KEY）",
+        "description": "「jwt填写」和风天气 私钥 PEM",
         "default": ""
       },
       "jwt_expire_seconds": {
         "type": "int",
         "description": "JWT 过期时间（秒）",
-        "hint": "默认 3600；建议范围 60~86400（和风天气要求最长不超过 24 小时）",
+        "hint": "默认 3600；范围 60~86400",
         "default": 3600
+      },
+      "active_push_sessions": {
+        "type": "list",
+        "description": "主动消息推送会话列表",
+        "hint": "每一项格式：user:个人QQ号 或 group:QQ群号",
+        "default": []
       },
       "default_location": {
         "type": "string",
@@ -59,7 +62,7 @@
       "geo_range": {
         "type": "string",
         "description": "GeoAPI 搜索范围",
-        "hint": "默认 cn（中国），可改为 world",
+        "hint": "默认 cn（中国），可改为 world，但可能增加误匹配风险",
         "options": [
           "cn",
           "world"
@@ -78,10 +81,27 @@
     "type": "object",
     "description": "实时天气相关配置",
     "items": {
+      "active_push_enabled": {
+        "type": "bool",
+        "description": "是否启用实时天气主动消息推送",
+        "default": false
+      },
+      "active_push_interval_minutes": {
+        "type": "int",
+        "description": "实时天气推送间隔时间（分钟）",
+        "hint": "最小 1 分钟",
+        "default": 60
+      },
+      "active_push_start_time": {
+        "type": "string",
+        "description": "实时天气开始推送时间",
+        "hint": "格式 HH:MM，例如 08:00",
+        "default": "08:00"
+      },
       "weather_fields": {
         "type": "object",
-        "description": "实时天气返回指标开关",
-        "hint": "可按需关闭不想展示的指标，例如只保留天气和温度",
+        "description": "实时天气返回指标",
+        "hint": "可按需关闭不想展示的指标",
         "items": {
           "match_location": {
             "type": "bool",
@@ -151,10 +171,26 @@
     "type": "object",
     "description": "天气预报相关配置",
     "items": {
+      "active_push_enabled": {
+        "type": "bool",
+        "description": "是否启用天气预报主动消息推送",
+        "default": false
+      },
+      "active_push_interval_minutes": {
+        "type": "int",
+        "description": "天气预报推送间隔时间（分钟）",
+        "hint": "最小 1 分钟",
+        "default": 60
+      },
+      "active_push_start_time": {
+        "type": "string",
+        "description": "天气预报开始推送时间",
+        "hint": "格式 HH:MM，例如 08:00",
+        "default": "08:00"
+      },
       "forecast_default_days": {
         "type": "string",
         "description": "天气预报默认天数",
-        "hint": "支持 3d、7d、10d、15d、30d",
         "options": [
           "3d",
           "7d",
@@ -170,6 +206,23 @@
     "type": "object",
     "description": "分钟级降水相关配置",
     "items": {
+      "active_push_enabled": {
+        "type": "bool",
+        "description": "是否启用分钟级降水主动消息推送",
+        "default": false
+      },
+      "active_push_interval_minutes": {
+        "type": "int",
+        "description": "分钟级降水推送间隔时间（分钟）",
+        "hint": "最小 1 分钟",
+        "default": 60
+      },
+      "active_push_start_time": {
+        "type": "string",
+        "description": "分钟级降水开始推送时间",
+        "hint": "格式 HH:MM，例如 08:00",
+        "default": "08:00"
+      },
       "minutely_show_details": {
         "type": "bool",
         "description": "分钟级降水是否显示各时段详细数据",

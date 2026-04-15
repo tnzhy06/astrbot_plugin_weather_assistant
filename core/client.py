@@ -31,9 +31,7 @@ class QWeatherClient:
         url = f"{api_host}/v7/weather/now"
         params = {
             "location": location,
-            # 强制中文返回，避免用户配置导致多语言输出不一致。
             "lang": "zh",
-            # 强制公制单位（摄氏度等），避免不同配置造成输出口径不一致。
             "unit": "m",
         }
         resp = await self._http_client.get(url, params=params, headers=headers)
@@ -46,7 +44,6 @@ class QWeatherClient:
         url = f"{api_host}/geo/v2/city/lookup"
         params = {
             "location": location,
-            # 强制中文返回，避免用户配置导致多语言输出不一致。
             "lang": "zh",
             "range": str(
                 self._config.get_group_value("global_config", "geo_range", "cn")
@@ -66,9 +63,7 @@ class QWeatherClient:
         url = f"{api_host}/v7/weather/{days}"
         params = {
             "location": location,
-            # 强制中文返回，避免用户配置导致多语言输出不一致。
             "lang": "zh",
-            # 强制公制单位（摄氏度等），避免不同配置造成输出口径不一致。
             "unit": "m",
         }
         resp = await self._http_client.get(url, params=params, headers=headers)
@@ -81,7 +76,6 @@ class QWeatherClient:
         url = f"{api_host}/v7/minutely/5m"
         params = {
             "location": location,
-            # 强制中文返回，避免用户配置导致多语言输出不一致。
             "lang": "zh",
         }
         resp = await self._http_client.get(url, params=params, headers=headers)

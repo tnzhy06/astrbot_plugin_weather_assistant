@@ -21,8 +21,6 @@ def is_direct_weather_location(location: str) -> bool:
         return False
     if "," in cleaned:
         return True
-    # 和风 LocationID 可能是纯数字，也可能是含数字的字母数字串。
-    # 纯英文单词（如 beijing）不应被当作 ID 直传。
     return cleaned.isdigit() or (
         cleaned.isalnum() and any(ch.isdigit() for ch in cleaned)
     )

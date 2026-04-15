@@ -1,6 +1,6 @@
 name: astrbot_plugin_weather_assistant
 display_name: 天气助手
-desc: 基于和风天气 API 的天气助手，当前支持实时天气查询。
+desc: 基于和风天气 API 的天气助手，提供实时天气、天气预报和分钟级降水查询能力。
 version: v1.5.2
 author: tnzhy06
 repo: https://github.com/tnzhy06/astrbot_plugin_weather_assistant

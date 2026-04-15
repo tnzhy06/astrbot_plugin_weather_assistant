@@ -17,6 +17,29 @@
 - 天气预报相关配置（`forecast_config`）
 - 分钟级降水相关配置（`minutely_precip_config`）
 
+主动消息推送配置：
+
+- `global_config.active_push_sessions`：主动推送会话列表
+- 列表每一项格式：`user:个人QQ号` / `group:QQ群号`
+- 示例：`["user:12345678", "group:87654321"]`
+
+在以下三个配置分组中均可独立配置主动推送：
+
+- `weather_now_config`（实时天气）
+- `forecast_config`（天气预报）
+- `minutely_precip_config`（分钟级降水）
+
+每个分组包含以下字段：
+
+- `active_push_enabled`：是否启用主动推送
+- `active_push_interval_minutes`：推送间隔时间（分钟）
+- `active_push_start_time`：开始推送时间（`HH:MM`）
+
+说明：
+
+- 分钟级降水主动推送要求 `default_location` 为经纬度。
+- QQ 主动推送会自动映射到当前已加载的 `aiocqhttp` 平台实例 ID（不是固定字符串）。
+
 JWT 推荐配置方式：
 
 1. 将 `global_config.auth_type` 设为 `jwt`
