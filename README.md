@@ -72,6 +72,7 @@ git clone https://github.com/tnzhy06/astrbot_plugin_weather_assistant.git
 - ` /weather 杭州`
 - ` /forecast 上海 7d`
 - ` /minutely 120.15,30.28`
+
 **💡若指令后不加参数将使用插件配置中的默认值**
 
 ------
