@@ -194,7 +194,7 @@ class WeatherAssistantPlugin(Star):
             logger.exception("天气预报查询发生未预期异常: %s", exc)
             yield event.plain_result("天气预报查询失败：发生未预期错误，请查看日志。")
 
-    @filter.command("minutely", alias={"分钟降水", "降水分钟预报"})
+    @filter.command("minutely", alias={"分钟降水", "降水"})
     async def minutely_precip(self, event: AstrMessageEvent, location: str = ""):
         """查询分钟级降水（未来 2 小时每 5 分钟）。
 
