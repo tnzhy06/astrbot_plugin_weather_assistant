@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
   <img src="./logo.png" alt="天气助手 Logo" width="128" />
 
@@ -18,7 +18,7 @@
 - 📅 **多日天气预报**：支持 3 - 30 天的天气预报。
 - 🌧️ **分钟级降水**：支持中国 1 公里精度的分钟级降雨预报，出门不再被淋雨。
 - 🔔 **智能主动推送**：实时天气、每日预报、降水预警可独立配置，按需开启。
-- 🚀 **JWT 鉴权**：支持更安全的和风天气 JWT 鉴权模式。
+- 🚀 **JWT 凭据**：支持更安全的和风天气 JWT 凭据模式。
 
 ------
 
@@ -28,7 +28,7 @@
 
 1. 进入 AstrBot 管理面板。
 2. 在 **插件市场** 搜索 `天气助手`。
-3. 点击 **一键安装**。
+3. 点击 **安装**。
 
 ### 方式二：手动安装
 
@@ -83,28 +83,28 @@ git clone https://github.com/tnzhy06/astrbot_plugin_weather_assistant.git
 
 ## ❓ 常见问题
 
-> **Q: JWT 鉴权失败怎么办？**
+> **Q: JWT 凭据认证失败怎么办？**
 >
-> - 请核对 `jwt_kid` 和 `jwt_project_id` 是否与和风后台一致。
-> - 确保私钥为 **ED25519** 格式，且复制时包含完整的 `-----BEGIN...` 标识。
+> - 请核对 `jwt_kid` 和 `jwt_project_id` 是否与和风天气后台一致。
+> - 确保私钥为 **ED25519** 格式，且复制时包含完整的 `-----BEGIN PRIVATE KEY----- XXX -----END PRIVATE KEY-----` 标识。
 
 > **Q: 分钟级降水为什么报错？**
 >
-> - 该功能必须输入经纬度。格式严格要求为：`经度,纬度` (例如 `121.47,31.23`)。
+> - 该功能必须输入经纬度。格式严格要求为：`经度,纬度` (例如 `121.47,31.23`)「小数点后保留两位」。
 
 ------
 
 ## 🤝 贡献与反馈
 
 1. 🌟 **Star** 这个项目以示鼓励。
-2. 🐛 提交 [Issue](https://www.google.com/search?q=https://github.com/tnzhy06/astrbot_plugin_weather_assistant/issues) 报告 Bug 或提出新功能建议。
-3. 🔧 欢迎提交 **Pull Request** 共同改进代码。
+2. 🐛 提交 **[Issue](https://github.com/tnzhy06/astrbot_plugin_weather_assistant/issues)** 报告 Bug 或提出新功能建议。
+3. 🔧 欢迎提交 **[Pull Request](https://github.com/tnzhy06/astrbot_plugin_weather_assistant/pulls)** 共同改进代码。
 
 ------
 
 ## 📄 开源协议
 
-本项目基于 [AGPL-3.0 License](https://www.google.com/search?q=https://github.com/tnzhy06/astrbot_plugin_weather_assistant/blob/main/LICENSE) 开源。
+本项目基于 [AGPL-3.0 License](https://github.com/tnzhy06/astrbot_plugin_weather_assistant/blob/master/LICENSE) 开源。
 
 ------
 

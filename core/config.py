@@ -55,7 +55,7 @@ class WeatherConfig:
         return expire_seconds
 
     def build_auth_headers(self) -> dict[str, str]:
-        """根据配置构建鉴权头。"""
+        """根据配置构建凭据头。"""
         auth_type = (
             str(self.get_group_value("global_config", "auth_type", "api_key"))
             .strip()

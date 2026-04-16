@@ -7,12 +7,12 @@
       "api_host": {
         "type": "string",
         "description": "和风天气 API Host",
-        "hint": "获取方式见文档，示例：https://xxxxxxxxxx.re.qweatherapi.com",
+        "hint": "获取方式见文档，示例：https://xxxx.re.qweatherapi.com",
         "default": ""
       },
       "auth_type": {
         "type": "string",
-        "description": "鉴权方式",
+        "description": "认证方式",
         "hint": "建议优先使用 jwt，也可使用 api_key",
         "options": [
           "jwt",
@@ -22,32 +22,32 @@
       },
       "api_key": {
         "type": "string",
-        "description": "「鉴权方式为 api_key 时填写」API Key",
-        "hint": "获取方式见文档",
+        "description": "API Key",
+        "hint": "「认证方式为 api_key 时填写」",
         "default": ""
       },
       "jwt_kid": {
         "type": "string",
-        "description": "「鉴权方式为 jwt 时填写」凭据ID",
-        "hint": "获取方式见文档",
+        "description": "凭据ID",
+        "hint": "「认证方式为 jwt 时填写」",
         "default": ""
       },
       "jwt_project_id": {
         "type": "string",
-        "description": "「鉴权方式为 jwt 时填写」项目ID",
-        "hint": "获取方式见文档",
+        "description": "项目ID",
+        "hint": "「认证方式为 jwt 时填写」",
         "default": ""
       },
       "jwt_private_key": {
         "type": "text",
-        "description": "「鉴权方式为 jwt 时填写」私钥PEM",
-        "hint": "获取方式见文档",
+        "description": "私钥PEM",
+        "hint": "「认证方式为 jwt 时填写」",
         "default": ""
       },
       "jwt_expire_seconds": {
         "type": "int",
         "description": "JWT 过期时间（秒）",
-        "hint": "默认 3600；范围 60~86400，无特殊情况请保持默认值",
+        "hint": "默认 3600；范围 60~86400",
         "default": 3600
       },
       "active_push_sessions": {
@@ -65,7 +65,7 @@
       "geo_range": {
         "type": "string",
         "description": "GeoAPI 搜索范围",
-        "hint": "默认 cn（中国），改为 world 可能增加误匹配风险，无特殊情况请保持默认值",
+        "hint": "默认 cn（中国），改为 world 可能增加误匹配风险",
         "options": [
           "cn",
           "world"
@@ -75,7 +75,7 @@
       "geo_number": {
         "type": "int",
         "description": "GeoAPI 返回候选数量",
-        "hint": "默认 10，插件会取第一条作为最佳匹配，无特殊情况请保持默认值",
+        "hint": "默认 10，插件会取第一条作为最佳匹配",
         "default": 10
       }
     }
@@ -235,3 +235,4 @@
     }
   }
 }
+

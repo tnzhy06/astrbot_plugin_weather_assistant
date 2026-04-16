@@ -2,7 +2,7 @@ import httpx
 
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent, filter
-from astrbot.api.star import Context, Star, register
+from astrbot.api.star import Context, Star
 
 from .core.client import QWeatherClient
 from .core.config import WeatherConfig
@@ -17,12 +17,6 @@ from .core.push_service import ActivePushService
 from .core.validators import is_lonlat, normalize_forecast_days
 
 
-@register(
-    "astrbot_plugin_weather_assistant",
-    "tnzhy06",
-    "基于和风天气 API 的天气助手",
-    "1.5.2",
-)
 class WeatherAssistantPlugin(Star):
     """天气助手插件：提供实时天气、天气预报和分钟级降水查询能力。"""
 
@@ -66,9 +60,7 @@ class WeatherAssistantPlugin(Star):
                 location_input
             )
             if not resolved:
-                yield event.plain_result(
-                    "未找到匹配地点，请其他地名。"
-                )
+                yield event.plain_result("未找到匹配地点，请其他地名。")
                 return
             resolved_location, display_name, full_name = resolved
 
@@ -77,7 +69,7 @@ class WeatherAssistantPlugin(Star):
             if code != "200":
                 logger.warning("和风天气返回非 200 状态码: %s", data)
                 yield event.plain_result(
-                    f"天气查询失败，接口返回 code={code}。请检查 location 或鉴权配置。"
+                    f"天气查询失败，接口返回 code={code}。请检查 location 或凭据配置。"
                 )
                 return
 
@@ -91,7 +83,7 @@ class WeatherAssistantPlugin(Star):
         except httpx.HTTPStatusError as exc:
             logger.error("和风天气 HTTP 异常: %s", exc)
             yield event.plain_result(
-                f"天气查询失败：HTTP {exc.response.status_code}，请检查 API Host、路径或鉴权。"
+                f"天气查询失败：HTTP {exc.response.status_code}，请检查 API Host、路径或凭据。"
             )
         except httpx.RequestError as exc:
             logger.error("和风天气请求异常: %s", exc)
@@ -144,7 +136,7 @@ class WeatherAssistantPlugin(Star):
             if code != "200":
                 logger.warning("天气预报返回非 200 状态码: %s", data)
                 yield event.plain_result(
-                    f"天气预报查询失败，接口返回 code={code}。请检查 location 或鉴权配置。"
+                    f"天气预报查询失败，接口返回 code={code}。请检查 location 或凭据配置。"
                 )
                 return
 
@@ -155,7 +147,7 @@ class WeatherAssistantPlugin(Star):
         except httpx.HTTPStatusError as exc:
             logger.error("天气预报 HTTP 异常: %s", exc)
             yield event.plain_result(
-                f"天气预报查询失败：HTTP {exc.response.status_code}，请检查 API Host、路径或鉴权。"
+                f"天气预报查询失败：HTTP {exc.response.status_code}，请检查 API Host、路径或凭据。"
             )
         except httpx.RequestError as exc:
             logger.error("天气预报请求异常: %s", exc)
@@ -201,7 +193,7 @@ class WeatherAssistantPlugin(Star):
             if code != "200":
                 logger.warning("分钟级降水返回非 200 状态码: %s", data)
                 yield event.plain_result(
-                    f"分钟级降水查询失败，接口返回 code={code}。请检查经纬度或鉴权配置。"
+                    f"分钟级降水查询失败，接口返回 code={code}。请检查经纬度或凭据配置。"
                 )
                 return
 
@@ -216,7 +208,7 @@ class WeatherAssistantPlugin(Star):
         except httpx.HTTPStatusError as exc:
             logger.error("分钟级降水 HTTP 异常: %s", exc)
             yield event.plain_result(
-                f"分钟级降水查询失败：HTTP {exc.response.status_code}，请检查 API Host、路径或鉴权。"
+                f"分钟级降水查询失败：HTTP {exc.response.status_code}，请检查 API Host、路径或凭据。"
             )
         except httpx.RequestError as exc:
             logger.error("分钟级降水请求异常: %s", exc)

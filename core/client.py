@@ -20,7 +20,7 @@ class QWeatherClient:
         headers = self._config.build_auth_headers()
         if not headers:
             raise ValueError(
-                "未配置鉴权信息，请填写 API Key 或 JWT（jwt_kid/jwt_project_id/jwt_private_key）。"
+                "未配置凭据信息，请填写 API Key 或 JWT（jwt_kid/jwt_project_id/jwt_private_key）。"
             )
 
         return api_host, headers
