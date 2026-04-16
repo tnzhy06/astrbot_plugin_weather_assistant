@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
   <img src="./logo.png" alt="天气助手 Logo" width="128" />
 
@@ -58,6 +58,10 @@ git clone https://github.com/tnzhy06/astrbot_plugin_weather_assistant.git
 > 💡 **经纬度信息获取指南**：
 >
 > 请前往 [天地图](https://dev.qweather.com/docs/configuration/) 右下角有鼠标指针的指向位置的经纬度信息，当然也可以使用其他你希望的方式获取。
+
+> 💡 **默认查询位置地名匹配错误的情况**：
+>
+> 请前往 https://github.com/qwd/LocationList/blob/master/China-City-List-latest.csv 手动查询地名对应的Location_ID填入配置项。
 
 ------
 
