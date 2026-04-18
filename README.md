@@ -106,6 +106,9 @@ git clone https://github.com/tnzhy06/astrbot_plugin_weather_assistant.git
 
 ------
 
+## 📝 更新日志
+ [CHANGELOG.md](CHANGELOG.md)
+
 ## 📄 开源协议
 
 本项目基于 [AGPL-3.0 License](https://github.com/tnzhy06/astrbot_plugin_weather_assistant/blob/master/LICENSE) 开源。
