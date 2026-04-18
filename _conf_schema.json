@@ -14,10 +14,7 @@
         "type": "string",
         "description": "认证方式",
         "hint": "建议优先使用 jwt，也可使用 api_key",
-        "options": [
-          "jwt",
-          "api_key"
-        ],
+        "options": ["jwt", "api_key"],
         "default": "api_key"
       },
       "api_key": {
@@ -66,10 +63,7 @@
         "type": "string",
         "description": "GeoAPI 搜索范围",
         "hint": "默认 cn（中国），改为 world 可能增加误匹配风险",
-        "options": [
-          "cn",
-          "world"
-        ],
+        "options": ["cn", "world"],
         "default": "cn"
       },
       "geo_number": {
@@ -194,13 +188,7 @@
       "forecast_default_days": {
         "type": "string",
         "description": "天气预报默认天数",
-        "options": [
-          "3d",
-          "7d",
-          "10d",
-          "15d",
-          "30d"
-        ],
+        "options": ["3d", "7d", "10d", "15d", "30d"],
         "default": "3d"
       }
     }
@@ -231,8 +219,13 @@
         "description": "分钟级降水是否显示各时段详细数据",
         "hint": "关闭后仅返回降水概述与更新时间",
         "default": true
+      },
+      "filter_summary_patterns": {
+        "type": "list",
+        "description": "分钟级主动推送过滤规则",
+        "hint": "支持精确匹配与正则表达式；例如：「未来两小时无降水」「 ^降雨还将持续\\d+分钟$」",
+        "default": []
       }
     }
   }
 }
-

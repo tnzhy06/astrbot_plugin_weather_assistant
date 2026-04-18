@@ -1,4 +1,5 @@
 import asyncio
+import re
 from collections.abc import Awaitable, Callable
 from datetime import datetime, timedelta
 
@@ -37,6 +38,15 @@ class ActivePushService:
 
     def start(self) -> None:
         """启动三类主动推送循环任务。"""
+        # Ensure loops can restart after stop() in reload scenarios.
+        if self._stop_event.is_set():
+            self._stop_event = asyncio.Event()
+
+        # Prevent duplicated loops when start() is called repeatedly.
+        if any(not task.done() for task in self._tasks):
+            logger.warning("主动推送服务已在运行，跳过重复启动。")
+            return
+
         self._tasks = [
             asyncio.create_task(
                 self._run_active_push_loop(
@@ -68,6 +78,59 @@ class ActivePushService:
             task.cancel()
         if self._tasks:
             await asyncio.gather(*self._tasks, return_exceptions=True)
+        self._tasks = []
+
+    def _get_minutely_summary_filter_patterns(self) -> list[str]:
+        """Read minutely summary filter rules from config."""
+        raw_value = self._weather_config.get_group_value(
+            "minutely_precip_config",
+            "filter_summary_patterns",
+            [],
+        )
+        patterns: list[str] = []
+        if isinstance(raw_value, list):
+            patterns = [str(item).strip() for item in raw_value if str(item).strip()]
+        elif isinstance(raw_value, str):
+            patterns = [
+                part.strip() for part in raw_value.replace("\r", "\n").split("\n")
+            ]
+            patterns = [pattern for pattern in patterns if pattern]
+
+        # Backward-compatible: keep supporting old boolean switch.
+        if bool(
+            self._weather_config.get_group_value(
+                "minutely_precip_config",
+                "filter_no_precip_summary_push",
+                False,
+            )
+        ):
+            patterns.append("未来两小时无降水")
+
+        deduplicated: list[str] = []
+        seen: set[str] = set()
+        for pattern in patterns:
+            if pattern not in seen:
+                seen.add(pattern)
+                deduplicated.append(pattern)
+        return deduplicated
+
+    def _match_minutely_summary_filter(
+        self, summary: str, patterns: list[str]
+    ) -> str | None:
+        """Return matched pattern when summary should be filtered."""
+        for pattern in patterns:
+            if summary == pattern:
+                return pattern
+            try:
+                if re.search(pattern, summary):
+                    return pattern
+            except re.error as exc:
+                logger.warning(
+                    "分钟级降水过滤规则正则无效，已跳过: pattern=%s error=%s",
+                    pattern,
+                    exc,
+                )
+        return None
 
     def _parse_push_session_list(self) -> list[str]:
         """解析主动推送会话列表，转为 unified_msg_origin。"""
@@ -311,6 +374,17 @@ class ActivePushService:
         code = str(data.get("code", ""))
         if code != "200":
             logger.warning("分钟级降水主动推送失败，接口返回 code=%s", code)
+            return
+
+        summary = str(data.get("summary", "")).strip()
+        patterns = self._get_minutely_summary_filter_patterns()
+        matched_pattern = self._match_minutely_summary_filter(summary, patterns)
+        if matched_pattern is not None:
+            logger.info(
+                "分钟级降水主动推送已过滤：summary=%s matched_pattern=%s",
+                summary,
+                matched_pattern,
+            )
             return
 
         show_details = bool(

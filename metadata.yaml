@@ -1,7 +1,7 @@
 name: astrbot_plugin_weather_assistant
 display_name: 天气助手
 desc: ☁️ 基于和风天气 API 的强大天气插件，支持精准查询与多维度主动推送，让你的机器人化身贴心的气象管家
-version: v1.0.1
+version: v1.0.2
 author: tnzhy06
 repo: https://github.com/tnzhy06/astrbot_plugin_weather_assistant
 astrbot_version: ">=4.9.2"
